@@ -2,6 +2,11 @@
 
 Sistema de ponto de venda desktop para a DG Lanches. O aplicativo reúne vendas, pedidos, produtos, clientes e controle de caixa em uma interface desenvolvida com Electron e persiste os dados localmente em SQLite.
 
+<img width="1917" height="940" alt="Captura de tela 2026-10-19 223716" src="https://github.com/user-attachments/assets/61f3ab67-6a8a-4c72-99c7-4c84b1991eb6" />
+
+<img width="1917" height="1078" alt="Captura de tela 2026-10-19 223247" src="https://github.com/user-attachments/assets/fb38c52c-de05-4e5a-a2fe-5648b79bc650" />
+
+
 ## Funcionalidades
 
 - **Vendas:** busca e categorias de produtos, carrinho, desconto, formas de pagamento e tipos de atendimento (balcão, retirada e delivery).
