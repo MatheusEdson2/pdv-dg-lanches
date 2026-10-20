@@ -1,0 +1,26 @@
+{
+  "planHash": "1d9d4d5537142179fc5e8b601aedf748606a2caf96e7434a4c8aa14d8421a92f",
+  "phase": "postupgrade",
+  "recordedAtUtc": "2026-07-08T02:03:39.4952887Z",
+  "retryCount": 0,
+  "resetBaseline": false,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 4832,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E pdv-dg-lanches@1.0.0 test\r\n\u003E node --test __tests__/*.spec.js\r\n\r\n(node:15532) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///c:/Users/mathe/Desktop/pdv-dg-lanches/__tests__/better-sqlite3.spec.js is not specified and it doesn\u0027t parse as CommonJS.\r\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\r\nTo eliminate this warning, add \u0022type\u0022: \u0022module\u0022 to \\\\?\\c:\\Users\\mathe\\Desktop\\pdv-dg-lanches\\package.json.\r\n(Use \u0060node --trace-warnings ...\u0060 to show where the warning was created)\r\n\u25B6 better-sqlite3 - package structure\r\n  \u2714 package.json lists better-sqlite3 as a dependency (2.1446ms)\r\n  \u2714 better-sqlite3 module resolves without JS-level errors (17.7073ms)\r\n\u2714 better-sqlite3 - package structure (22.0104ms)\r\n\u2139 tests 2\r\n\u2139 suites 1\r\n\u2139 pass 2\r\n\u2139 fail 0\r\n\u2139 cancelled 0\r\n\u2139 skipped 0\r\n\u2139 todo 0\r\n\u2139 duration_ms 254.3727\r\n",
+        "durationMs": 1514
+      }
+    ]
+  }
+}

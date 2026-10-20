@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════════
+   BASE.CSS
+   Fundação do projeto: cores, fontes, reset
+   Reaproveitável em qualquer projeto futuro
+═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap');
+
+/* ── PALETA DE CORES (mude aqui para trocar o tema inteiro) ── */
+:root {
+  --laranja: #F97316;
+  --laranja-escuro: #C2580A;
+  --laranja-glow: rgba(249, 115, 22, 0.18);
+
+  --preto: #0A0A0A;
+  --preto-card: #141414;
+  --preto-borda: #1E1E1E;
+  --preto-hover: #1A1A1A;
+
+  --branco: #F5F5F5;
+  --cinza: #9CA3AF;
+  --cinza-escuro: #374151;
+
+  --verde: #22C55E;
+  --vermelho: #EF4444;
+  --amarelo: #FBBF24;
+}
+
+/* ── RESET ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── SCROLLBAR PADRÃO (fina e discreta) ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 4px;
+}

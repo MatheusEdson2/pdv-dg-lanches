@@ -1,0 +1,251 @@
+/* ═══════════════════════════════════════════
+   LAYOUT.CSS
+   Estrutura geral: topbar, navegação, páginas
+═══════════════════════════════════════════ */
+
+/* ── TOPBAR ── */
+#topbar {
+  height: 62px;
+  background: var(--preto-card);
+  border-bottom: 1px solid var(--preto-borda);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--laranja);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  box-shadow: 0 0 14px var(--laranja-glow);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text span:first-child {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--laranja);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.logo-text span:last-child {
+  font-size: 10px;
+  color: var(--cinza);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── NAVEGAÇÃO (abas) ── */
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--cinza);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  background: var(--preto-hover);
+  color: var(--branco);
+}
+
+.nav-tab.active {
+  background: var(--laranja-glow);
+  color: var(--laranja);
+  border: 1px solid rgba(249, 115, 22, .3);
+}
+
+.nav-tab svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+#clock {
+  font-size: 13px;
+  color: var(--cinza);
+  font-variant-numeric: tabular-nums;
+}
+
+#status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(34, 197, 94, .12);
+  color: var(--verde);
+  border: 1px solid rgba(34, 197, 94, .25);
+}
+
+#status-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--verde);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+/* ── ÁREA PRINCIPAL E PÁGINAS ── */
+#main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.page {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.page.active {
+  display: flex;
+}
+
+.page-inner {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--branco);
+}
+
+.page-title span {
+  color: var(--laranja);
+}
+
+/* ── LOADING (tela de carregamento) ── */
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--preto);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  gap: 16px;
+}
+
+.developer-signature {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9998;
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 11px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.02em;
+}
+
+.developer-signature a {
+  color: inherit;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.developer-signature a:hover {
+  text-decoration: underline;
+}
+
+.btn-refresh {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.16);
+  color: var(--branco);
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+
+.btn-refresh:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.32);
+  transform: translateY(-1px);
+}
+
+.btn-refresh:active {
+  transform: scale(.98);
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--preto-borda);
+  border-top-color: var(--laranja);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,54 @@
+{
+  "name": "pdv-dg-lanches",
+  "version": "1.0.0",
+  "description": "PDV DG Lanches — Sistema de Ponto de Venda",
+  "author": "DG Lanches",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "node build/build.js",
+    "test": "node --test __tests__/*.spec.js"
+  },
+  "build": {
+    "appId": "com.dglanches.pdv",
+    "productName": "DG Lanches PDV",
+    "artifactName": "${productName} Setup ${version}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DG Lanches PDV",
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "files": [
+      "index.html",
+      "splash.html",
+      "main.js",
+      "preload.js",
+      "preload-splash.js",
+      "css/**/*",
+      "js/**/*",
+      "assets/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^34.5.8",
+    "electron-builder": "^26.15.3",
+    "vitest": "latest"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.11.1"
+  }
+}

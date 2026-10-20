@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DG Lanches</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A0A0A;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 55%, rgba(249, 115, 22, 0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 15% 15%, rgba(249, 115, 22, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 85% 85%, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 214, 133, 0.95), rgba(249, 115, 22, 0.05));
+      box-shadow: 0 0 24px rgba(249, 115, 22, 0.45);
+      opacity: 0.85;
+      animation: float linear infinite;
+    }
+
+    .spark {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(249, 115, 22, 0.08));
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.75);
+      opacity: 0.9;
+      animation: sparkPulse ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.65);
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 0.65;
+      }
+
+      75% {
+        opacity: 0.65;
+      }
+
+      100% {
+        transform: translateY(-180px) translateX(30px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sparkPulse {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .estrelas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .estrela {
+      position: absolute;
+      color: rgba(255, 229, 153, 0.92);
+      font-size: 14px;
+      animation: twinkle ease-in-out infinite;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.45);
+    }
+
+    @keyframes twinkle {
+      0%,
+      100% {
+        opacity: 0.15;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.85;
+        transform: scale(1.35);
+      }
+    }
+
+    /* CONTAINER */
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      animation: fadeInUp .8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* IMAGEM */
+    .logo-img-wrap {
+      position: relative;
+      width: 420px;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 35px rgba(249, 115, 22, 0.28));
+    }
+
+    .orbit-ring {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      background: radial-gradient(circle at center, transparent 28%, rgba(249, 115, 22, 0.03) 28%, rgba(249, 115, 22, 0.1) 34%, transparent 36%);
+      box-shadow: 0 0 34px rgba(249, 115, 22, 0.24), inset 0 0 20px rgba(249, 115, 22, 0.12);
+      animation: spin 14s linear infinite;
+      filter: drop-shadow(0 0 24px rgba(249, 115, 22, 0.18));
+    }
+
+    .orbit-ring.small {
+      width: 520px;
+      height: 520px;
+      border-image: conic-gradient(from 90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.18), rgba(249, 115, 22, 0.55), rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+      border-image-slice: 1;
+      animation-duration: 19s;
+    }
+
+    .orbit-ring.medium {
+      width: 620px;
+      height: 620px;
+      border-image: conic-gradient(from 90deg, rgba(255, 255, 255, 0), rgba(249, 115, 22, 0.28), rgba(255, 255, 255, 0.14), rgba(249, 115, 22, 0.32), rgba(255, 255, 255, 0));
+      border-image-slice: 1;
+      animation-duration: 25s;
+      animation-direction: reverse;
+    }
+
+    .orbit-ring.large {
+      width: 760px;
+      height: 760px;
+      border-image: conic-gradient(from 90deg, rgba(255, 255, 255, 0), rgba(249, 115, 22, 0.22), rgba(255, 255, 255, 0.06), rgba(249, 115, 22, 0.18), rgba(255, 255, 255, 0));
+      border-image-slice: 1;
+      animation-duration: 34s;
+    }
+
+    .orbit-ring::before,
+    .orbit-ring::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(255, 246, 216, 0.95) 30%, rgba(249, 115, 22, 0.25) 55%, transparent 100%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.8), 0 0 42px rgba(249, 115, 22, 0.7);
+      opacity: 0.98;
+      filter: blur(0.8px);
+    }
+
+    .orbit-ring::before {
+      animation: starPulse 1.8s ease-in-out infinite alternate;
+    }
+
+    .orbit-ring::after {
+      animation: starPulse 2.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes starPulse {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.92;
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.12);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.92;
+      }
+    }
+
+    .orbit-ring.small::before {
+      transform: translate(-50%, -50%) translateX(252px);
+    }
+
+    .orbit-ring.medium::before {
+      transform: translate(-50%, -50%) translateX(305px);
+    }
+
+    .orbit-ring.large::before {
+      transform: translate(-50%, -50%) translateX(365px);
+    }
+
+    .orbit-ring.small::after {
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.45);
+      opacity: 0.65;
+      transform: translate(-50%, -50%) translateX(-252px);
+    }
+
+    .orbit-ring.medium::after {
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.38);
+      opacity: 0.55;
+      transform: translate(-50%, -50%) translateX(-305px);
+    }
+
+    .orbit-ring.large::after {
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.32);
+      opacity: 0.46;
+      transform: translate(-50%, -50%) translateX(-365px);
+    }
+
+    .logo-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(255, 234, 181, 0.22), transparent 65%);
+      filter: blur(26px);
+      z-index: 0;
+    }
+
+    .logo-img {
+      position: relative;
+      z-index: 2;
+      animation: pulseLogo 3.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseLogo {
+      0%,
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 24px rgba(249, 115, 22, 0.25));
+      }
+
+      50% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 32px rgba(249, 115, 22, 0.35));
+      }
+    }
+
+    .ring,
+    .ring-2,
+    .ring-3 {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .logo-img {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(249, 115, 22, 0.6);
+      box-shadow: 0 0 36px rgba(249, 115, 22, 0.18);
+    }
+
+    /* BALÕES */
+    .balao {
+      position: absolute;
+      background: linear-gradient(135deg, #F97316, #C2580A);
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      padding: 10px 16px;
+      border-radius: 14px;
+      white-space: nowrap;
+      animation: bounce 2s ease-in-out infinite;
+      box-shadow: 0 4px 24px rgba(249, 115, 22, 0.5);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .balao::after {
+      content: '';
+      position: absolute;
+      border: 9px solid transparent;
+    }
+
+    .balao-left {
+      top: 30px;
+      left: -130px;
+      animation-delay: 0s;
+    }
+
+    .balao-left::after {
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left-color: #C2580A;
+    }
+
+    .balao-right {
+      top: 30px;
+      right: -130px;
+      animation-delay: .6s;
+    }
+
+    .balao-right::after {
+      left: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-right-color: #F97316;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* TEXTOS */
+    .titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 8px;
+      color: #fff;
+      line-height: 1;
+      margin-top: -14px;
+      text-align: center;
+      animation: fadeIn 1s ease .3s both;
+    }
+
+    .titulo span {
+      color: #F97316;
+      text-shadow: 0 0 40px rgba(249, 115, 22, 0.7);
+    }
+
+    .slogan {
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      margin-top: 6px;
+      text-align: center;
+      animation: fadeIn 1s ease .5s both;
+    }
+
+    .slogan span {
+      color: #F97316;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* DIVISOR */
+    .divisor {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 22px 0 16px;
+      width: 420px;
+      animation: fadeIn 1s ease .6s both;
+    }
+
+    .divisor-linha {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(249, 115, 22, 0.6), transparent);
+    }
+
+    /* BARRA DE PROGRESSO */
+    .progress-wrap {
+      width: 420px;
+      animation: fadeIn 1s ease .7s both;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #9CA3AF;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 5px;
+      background: #1E1E1E;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #C2580A, #F97316, #FBBF24);
+      border-radius: 10px;
+      transition: width .08s linear;
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.7);
+    }
+
+    /* VERSÃO */
+    .versao {
+      position: fixed;
+      bottom: 24px;
+      right: 28px;
+      font-size: 12px;
+      color: #374151;
+      letter-spacing: 1px;
+    }
+
+    /* LOGO FALLBACK */
+    #logo-fallback {
+      display: none;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A1A1A, #2A2A2A);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      border: 4px solid rgba(249, 115, 22, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="particles" id="particles"></div>
+  <div class="estrelas" id="estrelas"></div>
+
+  <div class="container">
+    <div class="logo-img-wrap">
+      <div class="orbit-ring large"></div>
+      <div class="orbit-ring medium"></div>
+      <div class="orbit-ring small"></div>
+
+      <div class="balao balao-left">SABOR QUE REÚNE!</div>
+      <div class="balao balao-right">O MELHOR<br>DA CIDADE!</div>
+
+      <img class="logo-img" src="assets/logo.jpg" alt="DG Lanches"
+        onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'">
+
+      <div id="logo-fallback">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:90px;color:#F97316;line-height:1">DG</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:4px">LANCHES</span>
+      </div>
+    </div>
+
+    <div class="titulo">DG <span>LANCHES</span></div>
+    <div class="slogan">★ <span>Sabor que Reúne</span> ★ Sistema PDV</div>
+
+    <div class="divisor">
+      <div class="divisor-linha"></div>
+      <span style="font-size:20px">🍔</span>
+      <div class="divisor-linha"></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="loading-msg">Iniciando sistema...</span>
+        <span id="loading-pct">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="versao">PDV v2.0 — SQLite</div>
+
+  <script>
+    // Partículas
+    const particles = document.getElementById('particles');
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 18 + 10;
+      p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;animation-duration:${Math.random() * 9 + 5}s;animation-delay:${Math.random() * 6}s;`;
+      particles.appendChild(p);
+    }
+
+    // Faíscas de brilho
+    for (let i = 0; i < 10; i++) {
+      const s = document.createElement('div');
+      s.className = 'spark';
+      const size = Math.random() * 10 + 4;
+      s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random() * 78 + 11}%;left:${Math.random() * 78 + 11}%;animation-duration:${Math.random() * 1.7 + 1.8}s;animation-delay:${Math.random() * 2.5}s;`;
+      particles.appendChild(s);
+    }
+
+    // Estrelas
+    const estrelas = document.getElementById('estrelas');
+    const emojis = ['✨', '🌟'];
+    for (let i = 0; i < 14; i++) {
+      const e = document.createElement('div');
+      e.className = 'estrela';
+      e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      e.style.cssText = `top:${Math.random() * 90}%;left:${Math.random() * 90}%;animation-duration:${Math.random() * 3.5 + 1.8}s;animation-delay:${Math.random() * 4}s;font-size:${Math.random() * 12 + 12}px;`;
+      estrelas.appendChild(e);
+    }
+
+    // Barra de progresso rápida para reduzir o tempo de abertura
+    const fill = document.getElementById('progress-fill');
+    const pct = document.getElementById('loading-pct');
+    const msg = document.getElementById('loading-msg');
+
+    const msgs = [
+      'Iniciando sistema...',
+      'Conectando ao banco de dados...',
+      'Carregando cardápio...',
+      'Carregando clientes...',
+      'Preparando os lanches... 🍔',
+      'Quase lá...',
+      'Tudo pronto! Bora vender! 🚀',
+    ];
+
+    let progress = 0;
+    let msgIdx = 0;
+    let completed = false;
+
+    const interval = setInterval(() => {
+      if (completed) return;
+
+      const step = Math.random() * 2.4 + 1.2;
+      progress = Math.min(100, progress + step);
+
+      fill.style.width = progress + '%';
+      pct.textContent = Math.floor(progress) + '%';
+
+      const newIdx = Math.min(Math.floor(progress / 15), msgs.length - 1);
+      if (newIdx !== msgIdx) {
+        msgIdx = newIdx;
+        msg.textContent = msgs[msgIdx];
+      }
+
+      if (progress >= 100) {
+        completed = true;
+        clearInterval(interval);
+        if (window.splashAPI) window.splashAPI.pronto();
+      }
+    }, 90);
+  </script>
+</body>
+
+</html>
